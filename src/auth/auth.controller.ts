@@ -51,7 +51,7 @@ export class AuthController {
 
       response.setHeader('Set-Cookie', cookie);
 
-      return response.redirect('http://localhost:3000/');
+      return response.redirect(this.configService.get('STEAM_REDIRECT_URL'));
     } catch (error) {
       console.error(error);
 
