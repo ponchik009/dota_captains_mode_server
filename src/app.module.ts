@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CaptainsConfigModule } from './captains_config/captains_config.module';
+import { LobbyModule } from './lobby/lobby.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { CaptainsConfigModule } from './captains_config/captains_config.module';
       }),
     }),
     CaptainsConfigModule,
+    LobbyModule,
   ],
   controllers: [],
   providers: [],

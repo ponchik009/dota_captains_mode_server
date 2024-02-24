@@ -12,6 +12,16 @@ export class UsersService {
   ) {}
 
   async createUser(steamId: string): Promise<User> {
+    const existed = await this.usersRepository.findOne({
+      where: {
+        steamId,
+      },
+    });
+
+    if (existed) {
+      return existed;
+    }
+
     const user = this.usersRepository.create({
       steamId,
     });
