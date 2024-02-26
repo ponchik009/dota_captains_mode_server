@@ -28,9 +28,12 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-socket.io": "^10.3.3",
     "@nestjs/typeorm": "^10.0.1",
+    "@nestjs/websockets": "^10.3.3",
     "axios": "^1.6.7",
     "big-integer": "^1.6.52",
+    "cookie": "^0.6.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.1",
     "node-steam-openid": "^1.2.1",
@@ -38,6 +41,7 @@
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.14",
     "rxjs": "^7.8.1",
+    "socket.io": "^4.7.4",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {

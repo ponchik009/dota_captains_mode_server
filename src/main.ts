@@ -6,7 +6,6 @@ import { AppModule } from './app.module';
 require('dotenv').config();
 
 async function bootstrap() {
-  // console.log(process.env);
   const app = await NestFactory.create(AppModule);
 
   app.use(cookieParser());

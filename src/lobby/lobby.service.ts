@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Lobby, LobbyStatus } from './lobby.entity';
 import { User } from 'src/users/users.entity';
 import { ICreateLobby } from './interfaces/createLobby.interface';
-import { LobbyPlayer } from './lobbyPlayer.entity';
+import { LobbyPlayer, LobbyPlayerSide } from './lobbyPlayer.entity';
 
 @Injectable()
 export class LobbyService {
@@ -51,9 +51,35 @@ export class LobbyService {
   public async joinLobby(lobbyId: string, user: User) {
     const lobby = await this.getLobby(lobbyId);
 
-    await this.lobbyRepository.save({
-      ...lobby,
-      players: [...lobby.players, user],
+    if (lobby.players.length > 1) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Lobby already has players',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    if (lobby.players.some((p) => p.player.id === user.id)) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Player already joined the lobby',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    await this.lobbyPlayerRepository.save({
+      player: { ...user },
+      side:
+        lobby.players[0].side === LobbyPlayerSide.DIRE
+          ? LobbyPlayerSide.RADIANT
+          : LobbyPlayerSide.DIRE,
+      lobby: {
+        id: lobby.id,
+      },
     });
 
     return await this.getLobby(lobbyId);

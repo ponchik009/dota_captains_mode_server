@@ -5,10 +5,11 @@ import { LobbyService } from './lobby.service';
 import { LobbyController } from './lobby.controller';
 import { Lobby } from './lobby.entity';
 import { LobbyPlayer } from './lobbyPlayer.entity';
+import { LobbyGateway } from './lobby.gateway';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Lobby, LobbyPlayer])],
-  providers: [LobbyService],
+  providers: [LobbyGateway, LobbyService],
   controllers: [LobbyController],
 })
 export class LobbyModule {}

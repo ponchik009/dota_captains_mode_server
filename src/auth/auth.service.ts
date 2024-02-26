@@ -40,11 +40,11 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return `Authentication=${token}; Max-Age=${this.configService.get(
       'JWT_EXPIRATION_TIME',
-    )}; HttpOnly; Path=/api; SameSite=None; Secure`;
+    )}; HttpOnly; Path=/; SameSite=Lax; Secure`;
   }
 
   public getCookieForLogOut() {
-    return `Authentication=; HttpOnly; Max-Age=0; Path=/api; SameSite=None; Secure`;
+    return `Authentication=; HttpOnly; Max-Age=0; Path=/; SameSite=Lax; Secure`;
   }
 
   public getSteam32ID(steamID64) {
