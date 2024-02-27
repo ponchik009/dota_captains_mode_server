@@ -40,11 +40,11 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return `Authentication=${token}; Max-Age=${this.configService.get(
       'JWT_EXPIRATION_TIME',
-    )}; HttpOnly; Path=/; SameSite=Lax; Secure`;
+    )}; HttpOnly; Path=/; SameSite=Lax; Secure; Domain=${this.configService.get('JWT_DOMAIN')}`;
   }
 
   public getCookieForLogOut() {
-    return `Authentication=; HttpOnly; Max-Age=0; Path=/; SameSite=Lax; Secure`;
+    return `Authentication=; HttpOnly; Max-Age=0; Path=/; SameSite=Lax; Secure; Domain=${this.configService.get('JWT_DOMAIN')}`;
   }
 
   public getSteam32ID(steamID64) {
