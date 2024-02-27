@@ -15,8 +15,7 @@ import { User } from 'src/users/users.entity';
 import { Lobby } from './lobby.entity';
 import axios from 'axios';
 
-@WebSocketGateway(3002, {
-  cors: ['http://localhost:3000', 'ws://localhost:3000'],
+@WebSocketGateway(0, {
   cookie: true,
 })
 export class LobbyGateway {
